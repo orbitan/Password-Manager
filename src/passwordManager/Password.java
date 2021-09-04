@@ -1,10 +1,10 @@
-package passwort.manager;
+package passwordManager;
 
 public class Password {
     
-    private String service;
-    private String username;
-    private String password;
+    protected final String service;
+    protected final String username;
+    protected final String password;
     
     public Password(String service, String username, String password){
         this.service = service;
@@ -14,20 +14,11 @@ public class Password {
     public String getService(){
         return this.service;
     }
-    public void setService(String service){
-        this.service = service;
-    }
     public String getUsername(){
         return this.username;
     }
-    public void setUsername(String username){
-        this.username = username;
-    }
     public String getPasswort(){
         return this.password;
-    }
-    public void setPassword(String password){
-        this.password = password;
     }
     @Override
     public String toString(){
