@@ -108,5 +108,17 @@ public class Safe implements Serializable{
         if(resultList.isEmpty()) throw new NoPasswordFoundException("No password stored with username: " + username);
         return resultList;
     }
-    
+    //return a list of passwords which matches the given tag
+    public List<Password> getPwByTag(String tag) throws NoPasswordFoundException{
+        List<Password> resultList = new ArrayList();
+        
+        //TODO: fill list from ResultSet via file/database
+        
+        if(resultList.isEmpty()) throw new NoPasswordFoundException("No password stored with tag: " + tag);
+        return resultList;
+    }
+    //returns all stored passwords
+    public List<Password> getAllPasswords(){
+        return this.list;
+    }
 }
