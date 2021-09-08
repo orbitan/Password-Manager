@@ -41,12 +41,13 @@ public class Safe implements Serializable{
         else throw new Exceptions.IncorrectPasswordException();
     }
     //authorize the access to the Safe object
-    public void authorize(String password) throws IncorrectPasswordException{
+    public boolean authorize(String password){
         if(password.equals(masterPw)){
             this.authorized = true;
             load();
+            return true;
         }
-        else throw new IncorrectPasswordException();
+        else return false;
     }
     //loads the list of passwords from file/database
     private void load(){

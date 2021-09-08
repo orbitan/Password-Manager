@@ -36,7 +36,8 @@ public class Password {
         String result = "";
         result += this.service + " "
                 + this.username + " " 
-                + this.password;
+                + this.password + " "
+                + this.tag;
         return result;
     }
 }
