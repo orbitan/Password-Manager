@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Safe implements Serializable{
     
-    private List<Password> list;
+    private List<Login> list;
     private String masterPw;
     private boolean authorized;
     
@@ -67,7 +67,7 @@ public class Safe implements Serializable{
             return true;
     }
     //add a password to the list
-    public void addPw(Password password) throws NotAuthorizedException{
+    public void addPw(Login password) throws NotAuthorizedException{
         if(this.authorized){
             this.list.add(password);
             save();
@@ -75,7 +75,7 @@ public class Safe implements Serializable{
         else throw new Exceptions.NotAuthorizedException();
     }
     //remove a password from the list
-    public void removePw(Password password) throws NotAuthorizedException{
+    public void removePw(Login password) throws NotAuthorizedException{
         if(this.authorized){
             this.list.remove(password);
             save();
@@ -83,7 +83,7 @@ public class Safe implements Serializable{
         else throw new Exceptions.NotAuthorizedException();
     }
     //change a password from the list; since Passwords are final, it needs to be removed and added again
-    public void changePw(Password password, Password newPassword) throws NotAuthorizedException{
+    public void changePw(Login password, Login newPassword) throws NotAuthorizedException{
         if(this.authorized){
             removePw(password);
             addPw(newPassword);
@@ -92,8 +92,8 @@ public class Safe implements Serializable{
         else throw new Exceptions.NotAuthorizedException();
     }
     //return a list of passwords which matches the given service
-    public List<Password> getPwByService(String service) throws NoPasswordFoundException{
-        List<Password> resultList = new ArrayList();
+    public List<Login> getPwByService(String service) throws NoPasswordFoundException{
+        List<Login> resultList = new ArrayList();
         
         //TODO: fill list from ResultSet via file/database
         
@@ -101,8 +101,8 @@ public class Safe implements Serializable{
         return resultList;
     }
     //return a list of passwords which matches the given username
-    public List<Password> getPwByUsername(String username) throws NoPasswordFoundException{
-        List<Password> resultList = new ArrayList();
+    public List<Login> getPwByUsername(String username) throws NoPasswordFoundException{
+        List<Login> resultList = new ArrayList();
         
         //TODO: fill list from ResultSet via file/database
         
@@ -110,8 +110,8 @@ public class Safe implements Serializable{
         return resultList;
     }
     //return a list of passwords which matches the given tag
-    public List<Password> getPwByTag(String tag) throws NoPasswordFoundException{
-        List<Password> resultList = new ArrayList();
+    public List<Login> getPwByTag(String tag) throws NoPasswordFoundException{
+        List<Login> resultList = new ArrayList();
         
         //TODO: fill list from ResultSet via file/database
         
@@ -119,7 +119,7 @@ public class Safe implements Serializable{
         return resultList;
     }
     //returns all stored passwords
-    public List<Password> getAllPasswords(){
+    public List<Login> getAllPasswords(){
         return this.list;
     }
 }

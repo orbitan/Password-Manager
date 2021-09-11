@@ -1,19 +1,19 @@
 package passwordManager;
 
-public class Password {
+public class Login {
     
     protected final String service;
     protected final String username;
     protected final String password;
     protected final String tag;
     
-    public Password(String service, String username, String password){
+    public Login(String service, String username, String password){
         this.service = service;
         this.username = username;
         this.password = password;
         this.tag = "";
     }
-    public Password(String service, String username, String password, String tag){
+    public Login(String service, String username, String password, String tag){
         this.service = service;
         this.username = username;
         this.password = password;

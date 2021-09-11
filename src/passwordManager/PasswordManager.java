@@ -4,9 +4,15 @@ import Exceptions.NotAuthorizedException;
 import java.util.Scanner;
         
 public class PasswordManager{
+    private final Safe safe;
+    
+    public PasswordManager(){
+        this.safe = new Safe();
+    }
     
     public static void main(String[] args) throws NotAuthorizedException{
         PasswordManager pwMan = new PasswordManager();
+        
         Safe safe = new Safe();
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter your masterpassword: ");
@@ -35,7 +41,7 @@ public class PasswordManager{
                 switch (sc.next()) {
                     case "new" ->                         {
                             System.out.print("new: ");
-                            Password pw = pwMan.newPassword(sc);
+                            Login pw = pwMan.newPassword(sc);
                             System.out.println(pw.toString());
                             System.out.println("Save password ? (true/false)");
                             boolean save = sc.nextBoolean();
@@ -48,7 +54,7 @@ public class PasswordManager{
                         }
                     case "gen" ->                        {
                             System.out.print("gen: ");
-                            Password pw = pwMan.newPasswordGen(sc);
+                            Login pw = pwMan.newPasswordGen(sc);
                             System.out.println(pw.toString());
                             System.out.println("Save password ? (true/false)");
                             boolean save = sc.nextBoolean();
@@ -71,7 +77,7 @@ public class PasswordManager{
             }
         }
     }
-    private Password newPassword(Scanner sc){
+    private Login newPassword(Scanner sc){
             sc.nextLine();
             System.out.println("Service: ");
             String service = sc.nextLine();
@@ -81,10 +87,10 @@ public class PasswordManager{
             String password = sc.nextLine();
             System.out.println("Tag: ");
             String tag = sc.nextLine();
-            Password pw = new Password(service, username, password, tag);
+            Login pw = new Login(service, username, password, tag);
             return pw;
     }
-    private Password newPasswordGen(Scanner sc){
+    private Login newPasswordGen(Scanner sc){
             sc.nextLine();
             System.out.println("Service: ");
             String service = sc.nextLine();
@@ -109,7 +115,7 @@ public class PasswordManager{
             }catch (NumberFormatException e){
                    password = pwGen.fertigGeneriertesPasswort(16, true, true, true, true);
             }
-            Password pw = new Password(service, username, password, tag);
+            Login pw = new Login(service, username, password, tag);
             return pw;
     }
 }

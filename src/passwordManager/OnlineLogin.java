@@ -1,11 +1,11 @@
 
 package passwordManager;
 
-public class OnlinePassword extends Password{
+public class OnlineLogin extends Login{
 
         private final String url;
         
-        public OnlinePassword(String service, String username, String password, String url){
+        public OnlineLogin(String service, String username, String password, String url){
             super(service, username, password);
             this.url = url;
         }
