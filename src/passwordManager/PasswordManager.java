@@ -5,6 +5,7 @@ import java.util.Scanner;
         
 public class PasswordManager{
     private final Safe safe;
+    //private final Apperance apperance;
     
     public PasswordManager(){
         this.safe = new Safe();
@@ -12,15 +13,20 @@ public class PasswordManager{
     
     public static void main(String[] args) throws NotAuthorizedException{
         PasswordManager pwMan = new PasswordManager();
+        if(args[0].contains("gui")){
+            //load gui mode
+        }
+        else{
+            //load console mode
+        }
         
-        Safe safe = new Safe();
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter your masterpassword: ");
         int attempts = 3;
         boolean audit = false;
         while(attempts > 0 && audit == false){
             String masterpw = sc.nextLine();
-            audit = safe.authorize(masterpw);
+            audit = pwMan.safe.authorize(masterpw);
             if(audit){
                 break;
             }
@@ -47,7 +53,7 @@ public class PasswordManager{
                             boolean save = sc.nextBoolean();
                             if(save){
                                 System.out.println("Saving...");
-                                safe.addPw(pw);
+                                pwMan.safe.addPw(pw);
                             }
                             else System.out.println("Abort");
                             break;
@@ -60,7 +66,7 @@ public class PasswordManager{
                             boolean save = sc.nextBoolean();
                             if(save){
                                 System.out.println("Saving...");
-                                safe.addPw(pw);
+                                pwMan.safe.addPw(pw);
                             }
                             else System.out.println("Abort");
                             break;
