@@ -66,14 +66,22 @@ public class PasswordManager{
                             break;
                         }
                     default -> {
+                        System.out.println("'new' to create a new login\n" 
+                                + "'gen' to create a new login with generated password\n" 
+                                + "'quit' to leave current mode\n" 
+                                + "'exit' to quit programm");
+                        break;
                     }
                 }
-
-
                 case "remove":
                 case "change":
                 case "get":
                 default: 
+                    System.out.println("'add' to create new login\n"
+                                           +"'remove' to delete login\n"
+                                           + "'change' to change login\n"
+                                            +"'get to show login(s)'");
+                    break;
             }
         }
     }
