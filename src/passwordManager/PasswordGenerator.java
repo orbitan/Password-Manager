@@ -55,4 +55,45 @@ public class PasswordGenerator {
         String password = passwordBuilder.toString();
         return password;
     }
+    public String defaultPassword(){
+        List<Character> letterList = new ArrayList<>(Arrays.asList('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'));
+        List<Character> upperCaseLetters = new ArrayList<>(Arrays.asList('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'));
+        List<Character> specialCharacters = new ArrayList<>(Arrays.asList('!', '#', '+', '*', '?', '&', '$', '-', '_'));
+        List<Character> numbers = new ArrayList<>(Arrays.asList('0', '1', '2', '3', '4', '5', '6', '7', '8', '9'));
+        Random random = new Random();
+        int randomElement;
+        List<Character> passwortListe = new ArrayList<>();
+
+        int requiredLength = 10;
+        int i = 0;
+
+        while(i < requiredLength) {
+            randomElement = random.nextInt(letterList.size());
+            passwortListe.add(letterList.get(randomElement));
+            i++;
+            randomElement = random.nextInt(10);
+            passwortListe.add(numbers.get(randomElement));
+            i++;
+            randomElement = random.nextInt(specialCharacters.size());
+            passwortListe.add(specialCharacters.get(randomElement));
+            i++;
+            randomElement = random.nextInt(letterList.size());
+            passwortListe.add(upperCaseLetters.get(randomElement));
+            i++;
+            randomElement = random.nextInt(letterList.size());
+            passwortListe.add(upperCaseLetters.get(randomElement));
+            i++;
+        }
+        StringBuilder passwordBuilder = new StringBuilder();
+        while (passwordBuilder.length() < requiredLength) {
+            randomElement = random.nextInt(passwortListe.size());
+            passwordBuilder.append(passwortListe.get(randomElement));
+            passwortListe.remove(randomElement);
+
+        }
+        return passwordBuilder.toString();
+
+    }
+    
+    
 }
