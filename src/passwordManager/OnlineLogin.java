@@ -5,8 +5,8 @@ public class OnlineLogin extends Login{
 
         private final String url;
         
-        public OnlineLogin(String service, String username, String password, String url){
-            super(service, username, password);
+        public OnlineLogin(String service, String username, String password, String tag, String url){
+            super(service, username, password, tag);
             this.url = url;
         }
         public String getUrl(){

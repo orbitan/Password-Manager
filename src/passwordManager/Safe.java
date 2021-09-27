@@ -1,6 +1,6 @@
 package passwordManager;
 
-import Exceptions.NoPasswordFoundException;
+import Exceptions.NoLoginFoundException;
 import Exceptions.IncorrectPasswordException;
 import Exceptions.NotAuthorizedException;
 import java.io.Serializable;
@@ -75,47 +75,56 @@ public class Safe implements Serializable{
         else throw new Exceptions.NotAuthorizedException();
     }
     //remove a password from the list
-    public void removePw(Login password) throws NotAuthorizedException{
+    public void removePw(String service, String username) throws NotAuthorizedException,NoLoginFoundException{
         if(this.authorized){
-            this.list.remove(password);
-            save();
+            boolean found = false;
+            for(Login login:list){
+                if(login.service.equals(service) && login.username.equals(username)){
+                    found = true;
+                    list.remove(login);
+                    save();
+                }
+            }
+            if(!found){
+                throw new NoLoginFoundException();
+            }
         }
         else throw new Exceptions.NotAuthorizedException();
     }
     //change a password from the list; since Passwords are final, it needs to be removed and added again
-    public void changePw(Login password, Login newPassword) throws NotAuthorizedException{
+    public void changePw(String service, String username, Login newPassword) throws NotAuthorizedException, NoLoginFoundException{
         if(this.authorized){
-            removePw(password);
+            removePw(service, username);
             addPw(newPassword);
             save();
         }
         else throw new Exceptions.NotAuthorizedException();
     }
     //return a list of passwords which matches the given service
-    public List<Login> getPwByService(String service) throws NoPasswordFoundException{
+    public List<Login> getPwByService(String service) throws NoLoginFoundException{
         List<Login> resultList = new ArrayList();
         
         //TODO: fill list from ResultSet via file/database
         
-        if(list.isEmpty()) throw new NoPasswordFoundException("No password stored with service: " + service);
+        if(list.isEmpty()) throw new NoLoginFoundException("No password stored with service: " + service);
         return resultList;
     }
     //return a list of passwords which matches the given username
-    public List<Login> getPwByUsername(String username) throws NoPasswordFoundException{
+    public List<Login> getPwByUsername(String username) throws NoLoginFoundException{
         List<Login> resultList = new ArrayList();
         
         //TODO: fill list from ResultSet via file/database
         
-        if(resultList.isEmpty()) throw new NoPasswordFoundException("No password stored with username: " + username);
+        if(resultList.isEmpty()) throw new NoLoginFoundException("No password stored with username: " + username);
         return resultList;
     }
     //return a list of passwords which matches the given tag
-    public List<Login> getPwByTag(String tag) throws NoPasswordFoundException{
+    public List<Login> getPwByTag(String tag) throws NoLoginFoundException{
         List<Login> resultList = new ArrayList();
         
         //TODO: fill list from ResultSet via file/database
         
-        if(resultList.isEmpty()) throw new NoPasswordFoundException("No password stored with tag: " + tag);
+        if(resultList.isEmpty()) throw new NoLoginFoundException("No password stored with tag: " + tag);
         return resultList;
     }
     //returns all stored passwords
