@@ -1,5 +1,9 @@
 package passwordManager;
         
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import javax.crypto.spec.SecretKeySpec;
+
 public class PasswordManager{
     
     private  Mode mode;
@@ -10,20 +14,16 @@ public class PasswordManager{
         pwMan.mode.run(); 
     
         EncryptionPassword ec = new EncryptionPassword();
+        
         //Insert password and prepare it for encryption and decryption
         ec.createPassword();   
 
-        SecretKeySpec key = EncryptionPassword.createSecretKey(ec.getPassword(), ec.getSalt(), ec.getIterationCount(), ec.getKeyLength());
-
-        //Test
-        String originalPassword = String.valueOf(ec1.getPassword());
-        System.out.println("Original password: " + originalPassword);
-
-        String encryptedPassword = EncryptionPassword.encrypt(originalPassword, key);
-        System.out.println("Encrypted password: " + encryptedPassword);
-
-        String decryptedPassword = EncryptionPassword.decrypt(encryptedPassword, key);
-        System.out.println("Decrypted password: " + decryptedPassword);
+        SecretKeySpec key;
+        try {
+            key = EncryptionPassword.createSecretKey(ec.getPassword(), ec.getSalt(), ec.getIterationCount(), ec.getKeyLength());
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException | NullPointerException ex) {
+            
+        }
     }
  
 }
