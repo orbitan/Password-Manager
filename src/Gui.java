@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 import java.awt.*;
 import java.util.Objects;
 
-public class GUImain extends Application {
+public class Gui extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
