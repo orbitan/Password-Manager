@@ -5,6 +5,7 @@ import Exceptions.NotAuthorizedException;
 import java.util.List;
 import java.util.Scanner;
 
+@Deprecated
 public class ConsoleMode extends Mode {
     
     private final Scanner sc;

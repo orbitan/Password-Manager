@@ -1,5 +1,6 @@
 package passwordManager;
 
+@Deprecated
 public abstract class Mode {
     
     protected Safe safe;
